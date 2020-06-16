@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     Button, Keyboard,
     KeyboardAvoidingView,
@@ -20,7 +20,7 @@ interface OwnProps {
 const CreateSetModal = (props: OwnProps) => {
     const {isOpen, setIsOpen, lastScore} = props;
     const lastScoreAsString = `${lastScore}`;
-    const [score, setScore] = React.useState(lastScoreAsString);
+    const [score, setScore] = React.useState('');
 
     const closeModal = () => setIsOpen(false);
 

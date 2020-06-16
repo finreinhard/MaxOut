@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList, Button, Modal, Alert} from "react-native";
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -22,8 +22,15 @@ const SkillDetailPage = (props: OwnProps) => {
     const {state} = useGlobalStore();
     const {title, sets} = state.skills[id];
     const [createSetIsVisible, setCreateSetIsVisible] = useModalState(false);
-    const highscore = 64;
-    const lastScore = -1;
+    const [highscore, setHighscore] = useState(-1);
+    const [lastScore, setLastScore] = useState(-1);
+
+    useEffect(() => {
+        setHighscore(sets.sort((setA, setB) => setB.score - setA.score)[0].score);
+        const lastScore = sets.sort((setA, setB) => setB.timestamp - setA.timestamp)[0].score;
+        alert(lastScore);
+        setLastScore(sets.sort((setA, setB) => setB.timestamp - setA.timestamp)[0].score);
+    }, [sets, setHighscore, setLastScore]);
 
     React.useEffect(() => {
         const handleAddSetButtonClick = () => {
