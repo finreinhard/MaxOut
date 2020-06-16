@@ -27,7 +27,6 @@ const SkillDetailPage = (props: OwnProps) => {
 
     useEffect(() => {
         setHighscore(sets.sort((setA, setB) => setB.score - setA.score)[0].score);
-        const lastScore = sets.sort((setA, setB) => setB.timestamp - setA.timestamp)[0].score;
         setLastScore(sets.sort((setA, setB) => setB.timestamp - setA.timestamp)[0].score);
     }, [sets, setHighscore, setLastScore]);
 
