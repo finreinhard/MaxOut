@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList, Button, Modal, Alert} from "react-native";
+import {View, Text, StyleSheet, FlatList, Button} from "react-native";
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../model/NavigationModel";
@@ -28,7 +28,6 @@ const SkillDetailPage = (props: OwnProps) => {
     useEffect(() => {
         setHighscore(sets.sort((setA, setB) => setB.score - setA.score)[0].score);
         const lastScore = sets.sort((setA, setB) => setB.timestamp - setA.timestamp)[0].score;
-        alert(lastScore);
         setLastScore(sets.sort((setA, setB) => setB.timestamp - setA.timestamp)[0].score);
     }, [sets, setHighscore, setLastScore]);
 
