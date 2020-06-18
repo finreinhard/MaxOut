@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {SkillSetModel} from "../model/SkillModel";
+import {SkillSetModel} from "../store/skills/types";
 import useRelativeTime from "../hooks/useRelativeTime";
 
 interface OwnProps {

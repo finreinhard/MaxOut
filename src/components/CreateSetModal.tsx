@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {
     Button, Keyboard,
     KeyboardAvoidingView,
@@ -10,6 +10,7 @@ import {
     TextInput, TouchableWithoutFeedback,
     View
 } from "react-native";
+import {useGlobalStore} from "../store";
 
 interface OwnProps {
     isOpen: boolean;
@@ -20,7 +21,7 @@ interface OwnProps {
 const CreateSetModal = (props: OwnProps) => {
     const {isOpen, setIsOpen, lastScore} = props;
     const lastScoreAsString = `${lastScore}`;
-    const [score, setScore] = React.useState('');
+    const [score, setScore] = useState('');
 
     const closeModal = () => setIsOpen(false);
 

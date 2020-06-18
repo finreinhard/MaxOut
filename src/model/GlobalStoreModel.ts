@@ -1,4 +1,4 @@
-import {SkillsMap} from "./SkillModel";
+import {SkillsMap} from "../store/skills/types";
 
 export interface GlobalStoreState {
     skills: SkillsMap;

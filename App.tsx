@@ -9,12 +9,9 @@ import moment from "moment";
 import 'moment/locale/de';
 
 const NavigationStack = createStackNavigator();
+moment.locale(Localization.locale);
 
 export default function App() {
-    useEffect(() => {
-        moment.locale(Localization.locale);
-    }, []);
-
     return (
         <GlobalStoreProvider>
             <NavigationContainer>

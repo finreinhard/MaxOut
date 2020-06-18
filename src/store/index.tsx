@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useReducer} from 'react';
 import {GlobalStoreContextProps, GlobalStoreState} from "../model/GlobalStoreModel";
 import {DispatchAction} from "../model/GlobalStoreModel";
+import mainReducer from "./reducers";
 
 const initialState = {
     skills: {
@@ -37,13 +38,6 @@ const initialState = {
     },
 };
 
-const reducer = (state: GlobalStoreState, action: DispatchAction<any>) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
-};
-
 const GlobalStore = createContext<GlobalStoreContextProps>({} as GlobalStoreContextProps)
 
 type OwnProps = {
@@ -51,7 +45,7 @@ type OwnProps = {
 };
 
 export const GlobalStoreProvider = ({children}: OwnProps) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(mainReducer, initialState);
 
     return (
         <GlobalStore.Provider value={{state, dispatch}}>

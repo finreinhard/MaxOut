@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, TouchableHighlight} from "react-native";
 import moment from "moment";
 import {useNavigation} from '@react-navigation/native'
-import {SkillSummaryModel} from "../model/SkillModel";
+import {SkillSummaryModel} from "../model/SkillSummaryModel";
 
 interface OwnProps {
     item: SkillSummaryModel;
@@ -12,7 +12,7 @@ const SkillSummary = (props: OwnProps) => {
     const {id, title, highscore, lastScore, lastRepetition} = props.item;
     const navigation = useNavigation();
 
-    const since = moment(lastRepetition).fromNow(false);
+    const since = lastRepetition ? moment(lastRepetition).fromNow(false) : 'Never';
 
     return (
         <TouchableHighlight
