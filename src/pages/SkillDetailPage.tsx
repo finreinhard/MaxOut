@@ -79,13 +79,11 @@ const SkillDetailPage = (props: OwnProps) => {
     );
 
     const deleteSkillButton = (
-        <SafeAreaView>
-            <Button
-                color="rgb(255, 59, 48)"
-                title="Delete Skill"
-                onPress={handleSkillDelete}
-            />
-        </SafeAreaView>
+        <Button
+            color="rgb(255, 59, 48)"
+            title="Delete Skill"
+            onPress={handleSkillDelete}
+        />
     );
     const createSetModal = (
         <CreateSetModal
@@ -113,14 +111,12 @@ const SkillDetailPage = (props: OwnProps) => {
     }
 
     return (
-        <View style={styles.container}>
-            <SafeAreaView>
-                <View style={styles.highscoreContainer}>
-                    <Text style={styles.highscoreNumber}>{highscore}</Text>
-                    <Text style={styles.highscoreTitle}>Your Best</Text>
-                </View>
-                <Text style={styles.lastActivitiesLabel}>Last Activities</Text>
-            </SafeAreaView>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.highscoreContainer}>
+                <Text style={styles.highscoreNumber}>{highscore}</Text>
+                <Text style={styles.highscoreTitle}>Your Best</Text>
+            </View>
+            <Text style={styles.lastActivitiesLabel}>Last Activities</Text>
             <FlatList
                 data={sets.sort((setA, setB) => setB.timestamp - setA.timestamp)}
                 renderItem={({item: set}) => (
@@ -133,7 +129,7 @@ const SkillDetailPage = (props: OwnProps) => {
             />
             {deleteSkillButton}
             {createSetModal}
-        </View>
+        </SafeAreaView>
     );
 }
 

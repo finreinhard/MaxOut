@@ -28,8 +28,6 @@ const HomePage = () => {
         })
         .sort((skillA, skillB) => (skillB.lastRepetition || Date.now()) - (skillA.lastRepetition || Date.now()));
 
-    console.log(data);
-
     const handleSetCreation = async (title: string | undefined) => {
         if (title) {
             dispatch(createSkill(await uuidv4(), title));

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Alert,
     Button, Keyboard,
@@ -30,8 +30,8 @@ const CreateSetModal = (props: OwnProps) => {
 
     const closeModal = () => setIsOpen(false);
     const createSet = async () => {
-        if (isNaN(Number(score))) {
-            Alert.alert(`"${score}" is not a number.`);
+        if (isNaN(Number(score)) || Number(score) <= 0) {
+            Alert.alert(`"${score}" is not a positive number.`);
             return;
         }
 
@@ -45,6 +45,10 @@ const CreateSetModal = (props: OwnProps) => {
         ));
         closeModal();
     }
+
+    useEffect(() => {
+        setScore('');
+    }, [isOpen]);
 
     return (
         <Modal
