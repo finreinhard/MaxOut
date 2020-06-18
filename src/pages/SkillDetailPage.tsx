@@ -87,6 +87,14 @@ const SkillDetailPage = (props: OwnProps) => {
             />
         </SafeAreaView>
     );
+    const createSetModal = (
+        <CreateSetModal
+            skillId={id}
+            isOpen={createSetIsVisible}
+            setIsOpen={setCreateSetIsVisible}
+            lastScore={lastScore}
+        />
+    )
 
     if (sets.length === 0) {
         return (
@@ -99,11 +107,7 @@ const SkillDetailPage = (props: OwnProps) => {
                     />
                     {deleteSkillButton}
                 </SafeAreaView>
-                <CreateSetModal
-                    isOpen={createSetIsVisible}
-                    setIsOpen={setCreateSetIsVisible}
-                    lastScore={lastScore}
-                />
+                {createSetModal}
             </View>
         );
     }
@@ -128,11 +132,7 @@ const SkillDetailPage = (props: OwnProps) => {
                 ItemSeparatorComponent={ListSeparator}
             />
             {deleteSkillButton}
-            <CreateSetModal
-                isOpen={createSetIsVisible}
-                setIsOpen={setCreateSetIsVisible}
-                lastScore={lastScore}
-            />
+            {createSetModal}
         </View>
     );
 }

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+    Alert,
     Button, Keyboard,
     KeyboardAvoidingView,
     Modal,
@@ -11,19 +12,39 @@ import {
     View
 } from "react-native";
 import {useGlobalStore} from "../store";
+import {uuidv4} from "../utils/uuid";
+import {createSet as createSetAction} from "../store/skills/actions";
 
 interface OwnProps {
+    skillId: string,
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
     lastScore: number;
 }
 
 const CreateSetModal = (props: OwnProps) => {
-    const {isOpen, setIsOpen, lastScore} = props;
+    const {skillId, isOpen, setIsOpen, lastScore} = props;
     const lastScoreAsString = `${lastScore}`;
     const [score, setScore] = useState('');
+    const {dispatch} = useGlobalStore();
 
     const closeModal = () => setIsOpen(false);
+    const createSet = async () => {
+        if (isNaN(Number(score))) {
+            Alert.alert(`"${score}" is not a number.`);
+            return;
+        }
+
+        dispatch(createSetAction(
+            skillId,
+            {
+                id: await uuidv4(),
+                timestamp: Date.now(),
+                score: Number(score),
+            },
+        ));
+        closeModal();
+    }
 
     return (
         <Modal
@@ -55,7 +76,7 @@ const CreateSetModal = (props: OwnProps) => {
                                 // @ts-ignore
                                 textAlign="center"
                             />
-                            <Button title="Create" onPress={() => alert('Hi')} />
+                            <Button title="Create" onPress={createSet} />
                         </View>
                     </KeyboardAvoidingView>
                 </TouchableWithoutFeedback>

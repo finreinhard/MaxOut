@@ -18,4 +18,5 @@ export type SkillsState = SkillsMap;
 export enum SkillsActionType {
     CREATE_SKILL = 'SKILLS_CREATE',
     DELETE_SKILL = 'SKILLS_DELETE',
+    CREATE_SET = 'SKILLS_CREATE_SET',
 }

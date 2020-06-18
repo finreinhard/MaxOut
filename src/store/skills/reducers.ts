@@ -46,6 +46,17 @@ const skillsReducer = (state = initialState, action: DispatchAction<any>) => {
             const newState = {...state};
             delete newState[action.payload.id]
             return newState;
+        case SkillsActionType.CREATE_SET:
+            return {
+                ...state,
+                [action.payload.skillId]: {
+                    ...state[action.payload.skillId],
+                    sets: [
+                        ...state[action.payload.skillId].sets,
+                        action.payload.set,
+                    ],
+                },
+            };
         default:
             return state;
     }
