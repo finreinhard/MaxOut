@@ -11,3 +11,8 @@ export const createSkill = (id: string, title: string) => ({
         },
     },
 });
+
+export const deleteSkill = (id: string) => ({
+    type: SkillsActionType.DELETE_SKILL,
+    payload: {id},
+});
