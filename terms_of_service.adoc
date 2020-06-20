@@ -1,0 +1,35 @@
+= Terms of Service
+Fin Reinhard <mail@angu.li>
+v1.0, 2020-06-20
+
+The following terms of service applies to the iOS and android app "MaxOut", in the following as "the app", programmed by Fin Reinhard and the website https://maxout.angu.li/[maxout.angu.li].
+This Terms of Service are also available at https://maxout.angu.li/terms-of-service[maxout.angu.li/terms-of-service].
+
+== Information according to §5 TMG
+
+Fin Reinhard +
+Schwarzenbergstraße 24 +
+34130 Kassel +
+Germany
+
+Mail: mail@angu.li +
+Tel: +49 157 77924748
+
+== Content Liability
+
+The services provided on this website might link to websites by third parties on whose content we do not have any influence and thereby cannot take any responsibility.
+At the time of linking the third party websites we could not identify any illegal content.
+Permanent monitoring cannot be expected.
+As soon as we find any illegal content we will immediatly remove the linking.
+
+== Copyright
+
+The content of this service is subject to German copyright law.
+The duplication, manipulation or distribution and any type of use outside the limits of the copyright law require explicit permisson of the creator or author of the content.
+Downloading or copying the contents of this website are only permitted for personal not commercial use.
+For content on this website not created by the provider please be aware of the copyright rights of the creators.
+
+== Changes to this service
+
+We reserve us the right to change or discontinue the services without any notice or compensation caused by those actions.
+These terms of Service are also subject to change without notice, for changes please review them periodically.
