@@ -12,8 +12,7 @@ const bindActions = (
         (previousValue, actionName) => ({
             ...previousValue,
             [actionName]: function () {
-                // @ts-ignore
-                return actions[actionName].apply(null, arguments)(dispatch);
+                return actions[actionName].apply(null, arguments as unknown as Array<any>)(dispatch);
             },
         }),
         {} as BoundActions,
