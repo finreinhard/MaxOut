@@ -3,12 +3,11 @@ import {View, Text, StyleSheet, FlatList, Button, SafeAreaView, Alert} from "rea
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../model/NavigationModel";
-import {useGlobalStore} from "../store";
 import SetSummary from "../components/SetSummary";
 import ListSeparator from "../components/ListSeparator";
 import useModalState from "../hooks/useModalState";
 import CreateSetModal from "../components/CreateSetModal";
-import {deleteSkill} from "../store/skills/actions";
+import useSkills from "../store/skills/hook";
 
 interface OwnProps {
     navigation: StackNavigationProp<RootStackParamList, 'Details'>
@@ -20,8 +19,8 @@ const orange = 'rgb(255, 149, 0)';
 const SkillDetailPage = (props: OwnProps) => {
     const {route, navigation} = props;
     const {id} = route.params;
-    const {state, dispatch} = useGlobalStore();
-    const {title, sets} = state.skills[id];
+    const {skills, deleteSkill} = useSkills();
+    const {title, sets} = skills[id];
     const [createSetIsVisible, setCreateSetIsVisible] = useModalState(false);
     const [highscore, setHighscore] = useState(0);
     const [lastScore, setLastScore] = useState(0);
@@ -34,7 +33,7 @@ const SkillDetailPage = (props: OwnProps) => {
     useEffect(() => {
         return () => {
             if (isDeleted) {
-                dispatch(deleteSkill(id));
+                deleteSkill(id);
             }
         }
     }, [navigation, isDeleted]);

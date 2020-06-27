@@ -2,35 +2,33 @@ import React from 'react';
 import {Alert, Button, FlatList, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import SkillSummary from "../components/SkillSummary";
 import {SkillSummaryModel} from "../model/SkillSummaryModel";
-import {useGlobalStore} from "../store";
 import ListSeparator from "../components/ListSeparator";
-import {createSkill} from "../store/skills/actions";
-import {uuidv4} from "../utils/uuid";
+import useSkills from "../store/skills/hook";
 
 const HomePage = () => {
-    const {state, dispatch} = useGlobalStore();
+    const {skills, createSkill} = useSkills();
 
     const data = Object
-        .keys(state.skills)
+        .keys(skills)
         .map((id: string): SkillSummaryModel => {
-            const highscoreList = state.skills[id].sets
+            const highscoreList = skills[id].sets
                 .sort((setA, setB) => setB.score - setA.score);
-            const lastSets = state.skills[id].sets
+            const lastSets = skills[id].sets
                 .map(set => ({lastRepetition: set.timestamp, lastScore: set.score}))
                 .sort((setA, setB) => setB.lastRepetition - setA.lastRepetition);
 
             return {
                 id,
-                title: state.skills[id].title,
+                title: skills[id].title,
                 highscore: highscoreList.length > 0 ? highscoreList[0].score : 0,
                 ...lastSets.length > 0 ? lastSets[0] : {lastScore: 0},
             };
         })
         .sort((skillA, skillB) => (skillB.lastRepetition || Date.now()) - (skillA.lastRepetition || Date.now()));
 
-    const handleSetCreation = async (title: string | undefined) => {
+    const handleSetCreation = (title: string | undefined) => {
         if (title) {
-            dispatch(createSkill(await uuidv4(), title));
+            createSkill(title);
         }
     };
 

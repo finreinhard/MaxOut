@@ -11,9 +11,7 @@ import {
     TextInput, TouchableWithoutFeedback,
     View
 } from "react-native";
-import {useGlobalStore} from "../store";
-import {uuidv4} from "../utils/uuid";
-import {createSet as createSetAction} from "../store/skills/actions";
+import useSkills from "../store/skills/hook";
 
 interface OwnProps {
     skillId: string,
@@ -26,23 +24,16 @@ const CreateSetModal = (props: OwnProps) => {
     const {skillId, isOpen, setIsOpen, lastScore} = props;
     const lastScoreAsString = `${lastScore}`;
     const [score, setScore] = useState('');
-    const {dispatch} = useGlobalStore();
+    const {createSet} = useSkills();
 
     const closeModal = () => setIsOpen(false);
-    const createSet = async () => {
+    const handleSetCreation = async () => {
         if (isNaN(Number(score)) || Number(score) <= 0) {
             Alert.alert(`"${score}" is not a positive number.`);
             return;
         }
 
-        dispatch(createSetAction(
-            skillId,
-            {
-                id: await uuidv4(),
-                timestamp: Date.now(),
-                score: Number(score),
-            },
-        ));
+        createSet(skillId, Number(score));
         closeModal();
     }
 
@@ -80,7 +71,7 @@ const CreateSetModal = (props: OwnProps) => {
                                 // @ts-ignore
                                 textAlign="center"
                             />
-                            <Button title="Create" onPress={createSet} />
+                            <Button title="Create" onPress={handleSetCreation} />
                         </View>
                     </KeyboardAvoidingView>
                 </TouchableWithoutFeedback>
