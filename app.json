@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "MaxOut",
-    "slug": "MaxOut",
+    "slug": "maxout",
+    "backgroundColor": "#B2E1FA",
     "platforms": [
       "ios",
       "android",
@@ -22,7 +23,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "li.angu.maxout",
+      "icon": "./assets/apple_icon.png"
     }
   }
 }

@@ -7,6 +7,7 @@ import {GlobalStoreProvider} from "./src/store";
 import * as Localization from "expo-localization";
 import moment from "moment";
 import 'moment/locale/de';
+import {StatusBar} from "react-native";
 
 const NavigationStack = createStackNavigator();
 moment.locale(Localization.locale);
@@ -14,6 +15,7 @@ moment.locale(Localization.locale);
 export default function App() {
     return (
         <GlobalStoreProvider>
+            <StatusBar barStyle="dark-content"/>
             <NavigationContainer>
                 <NavigationStack.Navigator>
                     <NavigationStack.Screen
