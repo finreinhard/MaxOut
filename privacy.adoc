@@ -2,10 +2,10 @@
 Fin Reinhard <mail@angu.li>
 v1.0, 2020-06-20
 
-The folowing privacy policy applies to the iOS and Android app &quot;MaxOut&quot;, in the following as MaxOut or the app, developed by Fin Reinhard and the website https://maxout.angu.li/[maxout.angu.li].
+The following privacy policy applies to the iOS and Android app &quot;MaxOut&quot;, in the following as MaxOut or the app, developed by Fin Reinhard and the website https://maxout.angu.li/[maxout.angu.li].
 This privacy policy is also available at https://maxout.angu.li/privacy[maxout.angu.li/privacy].
 
-Following we have collected some questions about privacy collected and answered.
+In the following we have collected some questions about privacy collected and answered.
 Feel free to contact us at mailto:mail@angu.li[mail@angu.li] when the list is incomplete.
 
 == What data collects the app?

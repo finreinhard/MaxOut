@@ -7,6 +7,7 @@ import CheckIcon from "../components/icons/CheckIcon";
 import TextIcon from "../components/icons/TextIcon";
 import useModalState from "../hooks/useModalState";
 import PrivacyPolicyModal from "../components/PrivacyPolicyModal";
+import LegalModal from "../components/legal/LegalModal";
 
 const LegalSetup = () => {
     const [privacyPolicyVisible, setPrivacyPolicyVisible] = useState(false);
@@ -55,9 +56,15 @@ const LegalSetup = () => {
                     color={colors.primary}
                     icon={CheckIcon}
                 />
-                <PrivacyPolicyModal
+                <LegalModal
                     visible={privacyPolicyVisible}
                     setVisible={setPrivacyPolicyVisible}
+                    contentType="PRIVACY_POLICY"
+                />
+                <LegalModal
+                    visible={termsOfServiceVisible}
+                    setVisible={setTermsOfServiceVisible}
+                    contentType="TERMS_OF_SERVICE"
                 />
             </SafeAreaView>
         </ScrollView>
