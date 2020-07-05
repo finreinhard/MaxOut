@@ -7,7 +7,6 @@ import CheckIcon from "../components/icons/CheckIcon";
 import TextIcon from "../components/icons/TextIcon";
 import useModalState from "../hooks/useModalState";
 import PrivacyPolicyModal from "../components/PrivacyPolicyModal";
-import AdocView from "react-native-adoc/lib";
 
 const LegalSetup = () => {
     const [privacyPolicyVisible, setPrivacyPolicyVisible] = useState(false);
@@ -27,10 +26,6 @@ const LegalSetup = () => {
         alert('Accepted');
     };
 
-    useEffect(() => {
-        console.log({privacyPolicyVisible});
-    }, [privacyPolicyVisible]);
-
     return (
         <ScrollView>
             <SafeAreaView style={styles.container}>
@@ -43,7 +38,6 @@ const LegalSetup = () => {
                     Nice to have you on board! First of all we have to manage some legal stuff. Take your time to read
                     our Privacy Policy and the Terms of Service carefully.
                 </Text>
-                <AdocView/>
                 <Button
                     onPress={showPrivacyPolicy}
                     text="Privacy Policy"
@@ -90,7 +84,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         marginBottom: 16,
-    }
+    },
 });
 
 export default LegalSetup;

@@ -4498,11 +4498,6 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-adoc@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.npmjs.org/react-native-adoc/-/react-native-adoc-1.0.7.tgz#91247bc71bbf1b2c9f4dc3dc6b9c822c0be194cd"
-  integrity sha512-GC6XJCLJKNrgCZoa7pNjmHDBweCJMBjHCa2dOf1rIldssrdNR1p1smMziiv6TbFA5mYkzqgukH9lgHwMQA78yg==
-
 react-native-gesture-handler@~1.6.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.1.tgz#678e2dce250ed66e93af409759be22cd6375dd17"

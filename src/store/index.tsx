@@ -29,8 +29,6 @@ export const GlobalStoreProvider = ({children}: OwnProps) => {
                 return;
             }
 
-            console.log('saved');
-
             saveInStorage(state)
                 .catch(console.error);
 
