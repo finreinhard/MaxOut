@@ -2,7 +2,7 @@
   "expo": {
     "name": "MaxOut",
     "slug": "maxout",
-    "backgroundColor": "#B2E1FA",
+    "backgroundColor": "#1E1E1E",
     "platforms": [
       "ios",
       "android",
@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#B2E1FA"
+      "backgroundColor": "#1E1E1E"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

@@ -7,6 +7,7 @@ import {AppState} from "react-native";
 
 const initialState = {
     skills: {},
+    setup: {},
 };
 
 const GlobalStore = createContext<GlobalStoreContextProps>({} as GlobalStoreContextProps)
@@ -23,6 +24,12 @@ export const GlobalStoreProvider = ({children}: OwnProps) => {
             if (newState === 'active') {
                 return;
             }
+
+            if (!state.setup || state.setup.accepted !== true) {
+                return;
+            }
+
+            console.log('saved');
 
             saveInStorage(state)
                 .catch(console.error);
@@ -43,6 +50,8 @@ export const GlobalStoreProvider = ({children}: OwnProps) => {
                 }
 
                 dispatch({type: CommonActionTypes.INITIAL_STATE, payload: JSON.parse(storeJson)});
+            })
+            .catch(() => {
             });
     }, []);
 

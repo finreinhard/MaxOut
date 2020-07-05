@@ -1,11 +1,12 @@
 import {CommonActionTypes, DispatchAction, GlobalStoreState} from "./types";
-import skillsReducer from "./skills/reducers";
+import skillsReducer from "./skills/reducer";
+import setupReducer from "./setup/reducer";
 import {logger} from "./middleware";
 
 const isLoggerEnabled = false;
 
 const mainReducer = (state: GlobalStoreState, action: DispatchAction<any>) => {
-    const {skills} = state;
+    const {skills, setup} = state;
 
     if (action.type === CommonActionTypes.INITIAL_STATE) {
         return action.payload;
@@ -13,6 +14,7 @@ const mainReducer = (state: GlobalStoreState, action: DispatchAction<any>) => {
 
     const currentState = {
         skills: skillsReducer(skills, action),
+        setup: setupReducer(setup, action),
     }
 
     if (isLoggerEnabled) {

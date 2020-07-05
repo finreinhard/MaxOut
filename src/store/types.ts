@@ -1,7 +1,9 @@
 import {SkillsMap} from './skills/types';
+import {SetupState} from "./setup/types";
 
 export interface GlobalStoreState {
     skills: SkillsMap;
+    setup: SetupState;
 }
 
 export interface GlobalStoreContextProps {
