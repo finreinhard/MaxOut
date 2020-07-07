@@ -4,8 +4,8 @@ import HomePage from "../pages/HomePage";
 import SkillDetailPage from "../pages/SkillDetailPage";
 import React from "react";
 import useSetup from "../store/setup/hook";
-import LegalSetup from "../pages/LegalSetup";
-import {Text} from "react-native";
+import LegalSetupPage from "../pages/LegalSetupPage";
+import WelcomePage from "../pages/WelcomePage";
 
 const NavigationStack = createStackNavigator();
 
@@ -13,11 +13,11 @@ const Navigation = () => {
     const {accepted, completed} = useSetup();
 
     if (!accepted) {
-        return <LegalSetup />;
+        return <LegalSetupPage />;
     }
 
     if (!completed) {
-        return <Text>TEst</Text>;
+        return <WelcomePage />;
     }
 
     return (

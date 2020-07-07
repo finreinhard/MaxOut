@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Image, SafeAreaView, ScrollView, StyleSheet, Text} from "react-native";
 import Button from "../components/Button";
 import colors from "../utils/color";
@@ -6,12 +6,13 @@ import PrivacyIcon from "../components/icons/PrivacyIcon";
 import CheckIcon from "../components/icons/CheckIcon";
 import TextIcon from "../components/icons/TextIcon";
 import useModalState from "../hooks/useModalState";
-import PrivacyPolicyModal from "../components/PrivacyPolicyModal";
 import LegalModal from "../components/legal/LegalModal";
+import useSetup from "../store/setup/hook";
 
-const LegalSetup = () => {
+const LegalSetupPage = () => {
     const [privacyPolicyVisible, setPrivacyPolicyVisible] = useState(false);
     const [termsOfServiceVisible, setTermsOfServiceVisible] = useModalState(false);
+    const {acceptLegalStuff} = useSetup();
 
     const showPrivacyPolicy = () => {
         setTermsOfServiceVisible(false);
@@ -23,9 +24,7 @@ const LegalSetup = () => {
         setTermsOfServiceVisible(true);
     };
 
-    const acceptLegalStuff = () => {
-        alert('Accepted');
-    };
+    const handleAcceptButtonPress = () => acceptLegalStuff(true);
 
     return (
         <ScrollView>
@@ -50,7 +49,7 @@ const LegalSetup = () => {
                     icon={TextIcon}
                 />
                 <Button
-                    onPress={acceptLegalStuff}
+                    onPress={handleAcceptButtonPress}
                     text="Accept All"
                     center
                     color={colors.primary}
@@ -94,4 +93,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LegalSetup;
+export default LegalSetupPage;

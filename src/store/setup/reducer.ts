@@ -11,7 +11,7 @@ const setupReducer = (state: SetupState, action: DispatchAction<any>) => {
         case SetupActionType.COMPLETE_SETUP:
             return {
                 ...state,
-                completed: action.payload.completed,
+                completed: true,
             };
         default:
             return state;
