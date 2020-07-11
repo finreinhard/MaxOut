@@ -2,7 +2,11 @@ import {CommonActionTypes, DispatchAction, GlobalStoreState} from "./types";
 import skillsReducer from "./skills/reducer";
 import setupReducer from "./setup/reducer";
 import {logger} from "./middleware";
-import {initialState} from "./index";
+
+export const initialState = {
+    skills: {},
+    setup: {},
+};
 
 const isLoggerEnabled = false;
 

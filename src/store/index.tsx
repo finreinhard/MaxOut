@@ -1,14 +1,9 @@
 import React, {createContext, useContext, useEffect, useReducer} from 'react';
 import {CommonActionTypes, GlobalStoreContextProps} from './types';
-import mainReducer from "./reducers";
+import mainReducer, {initialState} from "./reducers";
 import {GLOBAL_STORE_STORAGE_KEY, saveInStorage} from "./middleware";
 import AsyncStorage from "@react-native-community/async-storage";
 import {AppState} from "react-native";
-
-export const initialState = {
-    skills: {},
-    setup: {},
-};
 
 const GlobalStore = createContext<GlobalStoreContextProps>({} as GlobalStoreContextProps)
 
