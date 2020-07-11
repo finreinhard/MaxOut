@@ -18,4 +18,5 @@ export interface DispatchAction<T> {
 
 export enum CommonActionTypes {
     INITIAL_STATE = 'COMMON_INITIAL_STATE',
+    RESET = 'COMMON_RESET',
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {IconProps} from "../model/IconProps";
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, View} from "react-native";
+import Text from "./Text";
 
 interface FeatureCellProps {
     title: string;
@@ -16,7 +17,7 @@ const FeatureCell = (props: FeatureCellProps) => {
             <IconTag size={48} />
             <View style={styles.textContainer}>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.description}>{description}</Text>
+                <Text>{description}</Text>
             </View>
         </View>
     );
@@ -35,13 +36,7 @@ const styles = StyleSheet.create({
         marginLeft: 16,
     },
     title: {
-        color: '#fff',
         fontWeight: 'bold',
-        fontSize: 18,
-    },
-    description: {
-        color: '#fff',
-        fontSize: 18,
     },
 })
 

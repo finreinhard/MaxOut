@@ -1,9 +1,10 @@
 import React from 'react';
 import {Modal, SafeAreaView, ScrollView, StyleSheet, View} from "react-native";
-import colors from "../../utils/color";
 import Button from "../Button";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsOfService from "./TermsOfService";
+import {useTheme} from "@react-navigation/native";
+import {dangerColor} from "../../utils/color";
 
 interface LegalModalProps {
     visible: boolean;
@@ -13,6 +14,7 @@ interface LegalModalProps {
 
 const LegalModal = (props: LegalModalProps) => {
     const {visible, setVisible, contentType} = props;
+    const {colors} = useTheme();
 
     const closeModal = () => setVisible(false);
 
@@ -35,15 +37,15 @@ const LegalModal = (props: LegalModalProps) => {
             presentationStyle="fullScreen"
             hardwareAccelerated
         >
-            <ScrollView style={styles.container}>
+            <ScrollView style={{backgroundColor: colors.background}}>
                 <SafeAreaView style={styles.safeArea}>
                     <View style={styles.closeButton}>
                         <TextTag
                             styles={{
-                                title: styles.title,
+                                title: [styles.title, {color: colors.primary}],
                                 text: styles.text,
-                                sectionTitle: styles.sectionTitle,
-                                danger: styles.danger,
+                                sectionTitle: [styles.sectionTitle, {color: colors.primary}],
+                                danger: {color: dangerColor},
                             }}
                         />
                         <Button
@@ -59,9 +61,6 @@ const LegalModal = (props: LegalModalProps) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.background,
-    },
     safeArea: {
         flex: 1,
         margin: 16,
@@ -70,20 +69,15 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
         fontWeight: 'bold',
-        color: colors.primary,
     },
     text: {
         fontSize: 16,
         marginTop: 12,
         color: '#fff',
     },
-    danger: {
-        color: colors.danger,
-    },
     sectionTitle: {
         marginTop: 14,
         fontSize: 18,
-        color: colors.primary,
     },
     closeButton: {
         marginTop: 18,

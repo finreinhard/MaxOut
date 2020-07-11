@@ -5,7 +5,7 @@ import {GLOBAL_STORE_STORAGE_KEY, saveInStorage} from "./middleware";
 import AsyncStorage from "@react-native-community/async-storage";
 import {AppState} from "react-native";
 
-const initialState = {
+export const initialState = {
     skills: {},
     setup: {},
 };

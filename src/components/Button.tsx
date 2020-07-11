@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
-import colors from "../utils/color";
 import {IconProps} from "../model/IconProps";
+import {useTheme} from "@react-navigation/native";
+import {changeLuminance} from "../utils/color";
 
 interface ButtonProps {
     text: string;
@@ -19,12 +20,17 @@ const Button = (props: ButtonProps) => {
         icon: IconTag,
         onPress,
     } = props;
+    const {colors} = useTheme();
 
     return (
         <TouchableHighlight
-            style={[styles.container, center && styles.center]}
+            style={[
+                styles.container,
+                {backgroundColor: colors.card},
+                center && styles.center,
+            ]}
             onPress={onPress}
-            underlayColor="#404040"
+            underlayColor={changeLuminance(colors.card, .2)}
         >
             <React.Fragment>
                 {IconTag && (
@@ -32,7 +38,7 @@ const Button = (props: ButtonProps) => {
                         <IconTag color={color} size={24} />
                     </View>
                 )}
-                <Text style={[styles.text, {color: color || '#fff'}]}>
+                <Text style={[styles.text, {color: color || colors.text}]}>
                     {text}
                 </Text>
             </React.Fragment>
@@ -43,7 +49,6 @@ const Button = (props: ButtonProps) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: colors.foreground,
         borderRadius: 12,
         marginVertical: 6,
         padding: 12,

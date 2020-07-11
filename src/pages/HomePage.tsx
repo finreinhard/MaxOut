@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     header: {
-        margin: 15,
+        margin: 16,
         flexDirection: 'row',
         alignItems: 'flex-end',
         justifyContent: 'space-between',
