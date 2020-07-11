@@ -32,20 +32,20 @@ const SettingsPage = () => {
     return (
         <Container>
             <Title text="Settings" />
-            <Text>Be careful! This step cannot be reverted.</Text>
+            <Text withMargin>Be careful! This step cannot be reverted.</Text>
             <Button
                 icon={DeleteIcon}
                 text="Delete all data"
                 onPress={handleDeleteAllData}
                 color={dangerColor}
             />
-            <Text>
+            <Text withMargin>
                 You want to read our Privacy Policy and the Terms of Service again? No Problem! Just click on the
                 sheet you want to read.
             </Text>
             <LegalModalButtons />
-            <Text>{`MaxOut v${packageJson.version}`}</Text>
-            <Text>Developed in Kassel by NorthSportDE and Anguli Networks.</Text>
+            <Text withMargin>{`MaxOut v${packageJson.version}`}</Text>
+            <Text withMargin>Developed in Kassel by NorthSportDE and Anguli Networks.</Text>
         </Container>
     );
 };
