@@ -15,6 +15,9 @@ export const containerStyles = StyleSheet.create({
         margin: 16,
         marginTop: 64,
     },
+    marginForTabBar: {
+        marginBottom: 128,
+    },
 });
 
 export default Container;

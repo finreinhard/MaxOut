@@ -1,34 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList, Button, SafeAreaView, Alert} from "react-native";
-import {RouteProp} from '@react-navigation/native';
+import {
+    View,
+    StyleSheet,
+    FlatList,
+    Alert,
+} from "react-native";
+import {RouteProp, useTheme} from '@react-navigation/native';
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../model/NavigationModel";
 import SetSummary from "../components/SetSummary";
-import ListSeparator from "../components/ListSeparator";
-import useModalState from "../hooks/useModalState";
-import CreateSetModal from "../components/CreateSetModal";
 import useSkills from "../store/skills/hook";
+import {containerStyles} from "../components/Container";
+import {dangerColor} from "../utils/color";
+import Button from "../components/Button";
+import Text from "../components/Text";
+import ScoreInput from "../components/ScoreInput";
+import ListSeparator from "../components/ListSeparator";
 
 interface OwnProps {
     navigation: StackNavigationProp<RootStackParamList, 'Details'>
     route: RouteProp<RootStackParamList, 'Details'>
 }
 
-const orange = 'rgb(255, 149, 0)';
-
 const SkillDetailPage = (props: OwnProps) => {
     const {route, navigation} = props;
     const {id} = route.params;
     const {skills, deleteSkill} = useSkills();
     const {title, sets} = skills[id];
-    const [createSetIsVisible, setCreateSetIsVisible] = useModalState(false);
     const [highscore, setHighscore] = useState(0);
-    const [lastScore, setLastScore] = useState(0);
     const [isDeleted, setDeleted] = useState(false);
-
-    const handleAddSetButtonClick = () => {
-        setCreateSetIsVisible(true);
-    }
+    const {colors} = useTheme();
 
     useEffect(() => {
         return () => {
@@ -41,22 +42,8 @@ const SkillDetailPage = (props: OwnProps) => {
     useEffect(() => {
         if (sets.length > 0) {
             setHighscore(sets.sort((setA, setB) => setB.score - setA.score)[0].score);
-            setLastScore(sets.sort((setA, setB) => setB.timestamp - setA.timestamp)[0].score);
         }
-    }, [sets, setHighscore, setLastScore]);
-
-    useEffect(() => {
-        navigation.setOptions({
-            title,
-            headerRight: ({tintColor}) => (
-                <Button
-                    onPress={handleAddSetButtonClick}
-                    title="Add Set"
-                    color={tintColor}
-                />
-            )
-        });
-    }, [title, handleAddSetButtonClick]);
+    }, [sets, setHighscore]);
 
     const handleSkillDelete = () => Alert.alert(
         'Deleting Skill',
@@ -77,77 +64,82 @@ const SkillDetailPage = (props: OwnProps) => {
         ],
     );
 
-    const deleteSkillButton = (
-        <Button
-            color="rgb(255, 59, 48)"
-            title="Delete Skill"
-            onPress={handleSkillDelete}
-        />
-    );
-    const createSetModal = (
-        <CreateSetModal
-            skillId={id}
-            isOpen={createSetIsVisible}
-            setIsOpen={setCreateSetIsVisible}
-            lastScore={lastScore}
-        />
-    )
-
-    if (sets.length === 0) {
-        return (
-            <View style={styles.container}>
-                <SafeAreaView style={styles.noEntries}>
-                    <Text>Huh! Pretty empty here</Text>
-                    <Button
-                        title="Create your first set"
-                        onPress={handleAddSetButtonClick}
-                    />
-                    {deleteSkillButton}
-                </SafeAreaView>
-                {createSetModal}
-            </View>
-        );
-    }
-
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.highscoreContainer}>
-                <Text style={styles.highscoreNumber}>{highscore}</Text>
-                <Text style={styles.highscoreTitle}>Your Best</Text>
-            </View>
-            <Text style={styles.lastActivitiesLabel}>Last Activities</Text>
-            <FlatList
-                data={sets.sort((setA, setB) => setB.timestamp - setA.timestamp)}
-                renderItem={({item: set}) => (
-                    <SetSummary
-                        set={set}
-                        isHighscore={set.score === highscore}
-                    />
-                )}
-                ItemSeparatorComponent={ListSeparator}
-            />
-            {deleteSkillButton}
-            {createSetModal}
-        </SafeAreaView>
+        <FlatList
+            style={styles.container}
+            data={sets.sort((setA, setB) => setB.timestamp - setA.timestamp)}
+            ListHeaderComponent={() => (
+                <>
+                    {sets.length > 0 && (
+                        <View style={[styles.highscoreContainer, {borderColor: colors.primary}]}>
+                            <Text style={[styles.highscoreNumber, {color: colors.primary}]}>{highscore}</Text>
+                            <Text style={[styles.highscoreTitle, {color: colors.primary}]}>Your Best</Text>
+                        </View>
+                    )}
+                    <ScoreInput skillId={id} />
+                    {sets.length > 0 && (
+                        <View
+                            style={[
+                                styles.setsHeader,
+                                {
+                                    backgroundColor: colors.card,
+                                    borderColor: colors.border,
+                                },
+                            ]}
+                        >
+                            <Text>Last Activities</Text>
+                        </View>
+                    )}
+                </>
+            )}
+            renderItem={({item: set}) => (
+                <SetSummary
+                    set={set}
+                    isHighscore={set.score === highscore}
+                />
+            )}
+            ItemSeparatorComponent={ListSeparator}
+            ListFooterComponent={() => (
+                <>
+                    {sets.length > 0 && (
+                        <View
+                            style={[
+                                styles.setsFooter,
+                                {
+                                    backgroundColor: colors.card,
+                                    borderColor: colors.border,
+                                },
+                            ]}
+                        >
+                            <Text>
+                                {`${sets.length} sets with ${sets.reduce((previousValue, currentValue) => previousValue + currentValue.score, 0)} repititions in total.`}
+                            </Text>
+                        </View>
+                    )}
+                    <View style={containerStyles.marginForTabBar}>
+                        <Button
+                            color={dangerColor}
+                            text="Delete Skill"
+                            onPress={handleSkillDelete}
+                        />
+                    </View>
+                </>
+            )}
+        />
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
+    menuAddButton: {
+        marginRight: 16,
     },
-    noEntries: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+    container: {
+        padding: 16,
     },
     highscoreContainer: {
-        marginVertical: 50,
         alignSelf: 'center',
         flexDirection: 'column',
         borderWidth: 10,
-        borderColor: orange,
         borderRadius: 100,
         width: 200,
         height: 200,
@@ -155,20 +147,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     highscoreNumber: {
-        color: orange,
         textAlign: 'center',
         fontSize: 64,
         fontWeight: 'bold',
     },
     highscoreTitle: {
-        color: orange,
         fontSize: 24,
     },
-    lastActivitiesLabel: {
-        color: '#666',
-        fontSize: 18,
+    setsHeader: {
+        borderBottomWidth: 1,
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
         padding: 16,
-    }
+    },
+    setsFooter: {
+        borderTopWidth: 1,
+        borderBottomLeftRadius: 12,
+        borderBottomRightRadius: 12,
+        padding: 16,
+        marginBottom: 16,
+    },
 });
 
 export default SkillDetailPage;

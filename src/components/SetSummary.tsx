@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {SkillSetModel} from "../store/skills/types";
 import useRelativeTime from "../hooks/useRelativeTime";
+import {useTheme} from "@react-navigation/native";
+import Text from "./Text";
 
 interface OwnProps {
     set: SkillSetModel;
@@ -10,11 +12,12 @@ interface OwnProps {
 
 const SetSummary = (props: OwnProps) => {
     const {set, isHighscore} = props;
+    const {colors} = useTheme();
     const relativeTime = useRelativeTime(set.timestamp);
-    const isHighscoreStyle = isHighscore && styles.isHighscore;
+    const isHighscoreStyle = isHighscore && {color: colors.primary};
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: colors.card}]}>
             <Text style={isHighscoreStyle}>{relativeTime}</Text>
             <Text style={isHighscoreStyle}>{set.score}</Text>
         </View>
@@ -29,9 +32,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         paddingHorizontal: 16,
         paddingVertical: 8,
-    },
-    isHighscore: {
-        color: 'rgb(255, 149, 9)',
     },
 });
 

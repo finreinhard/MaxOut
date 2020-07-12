@@ -17,8 +17,11 @@ const NavigationTabBar = (props: BottomTabBarProps<BottomTabBarOptions>) => {
     return (
         <View style={[
             styles.container,
-            {bottom: bottom || 16},
-            {backgroundColor: colors.card},
+            {
+                bottom: bottom || 16,
+                backgroundColor: colors.card,
+                borderColor: colors.border,
+            },
         ]}>
             {state.routes.map((route, index) => {
                 const {options} = descriptors[route.key];
@@ -67,12 +70,22 @@ const styles = StyleSheet.create({
     positioning: {},
     container: {
         position: 'absolute',
-        left: 16,
-        right: 16,
+        left: 64,
+        right: 64,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         borderRadius: 12,
+        borderWidth: 1,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+
+        elevation: 4,
     },
     entry: {
         flexGrow: 1,

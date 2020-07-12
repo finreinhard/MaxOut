@@ -101,6 +101,9 @@ const HomePage = () => {
                     />
                 </View>
             )}
+            ListFooterComponent={() => (
+                <View style={containerStyles.marginForTabBar} />
+            )}
         />
     );
 };

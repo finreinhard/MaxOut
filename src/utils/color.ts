@@ -5,7 +5,7 @@ export const defaultTheme = {
         background: '#1E1E1E',
         card: '#333',
         text: '#fff',
-        border: 'rgb(199, 199, 204)',
+        border: '#444',
     },
 };
 
