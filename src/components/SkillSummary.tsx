@@ -70,7 +70,8 @@ const SkillSummary = (props: OwnProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 16,
+        marginVertical: 8,
+        marginHorizontal: 16,
         borderRadius: 12,
     },
     header: {
