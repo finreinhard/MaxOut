@@ -40,7 +40,7 @@ const HomePage = () => {
                     true,
                 ),
             })),
-        (skill) => extractFirstOr(skill.lastSets, (set) => set.timestamp, 0),
+        (skill) => extractFirstOr(skill.lastSets, (set) => set.timestamp, Date.now()),
         true,
     );
 
