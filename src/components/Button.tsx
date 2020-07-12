@@ -10,6 +10,8 @@ interface ButtonProps {
     color?: string,
     center?: boolean,
     icon?: React.FunctionComponent<IconProps>,
+    iconSize?: number;
+    small?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
@@ -18,7 +20,9 @@ const Button = (props: ButtonProps) => {
         color,
         center,
         icon: IconTag,
+        iconSize,
         onPress,
+        small,
     } = props;
     const {colors} = useTheme();
 
@@ -28,14 +32,15 @@ const Button = (props: ButtonProps) => {
                 styles.container,
                 {backgroundColor: colors.card},
                 center && styles.center,
+                small && styles.small,
             ]}
             onPress={onPress}
             underlayColor={changeLuminance(colors.card, .2)}
         >
             <React.Fragment>
                 {IconTag && (
-                    <View style={styles.icon}>
-                        <IconTag color={color} size={24} />
+                    <View style={{marginRight: (iconSize || 24) / 2}}>
+                        <IconTag color={color} size={iconSize || 24} />
                     </View>
                 )}
                 <Text style={[styles.text, {color: color || colors.text}]}>
@@ -56,11 +61,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    small: {
+       marginVertical: 0,
+       paddingVertical: 0,
+    },
     center: {
         justifyContent: 'center',
-    },
-    icon: {
-        marginRight: 12,
     },
     text: {
         fontSize: 18,

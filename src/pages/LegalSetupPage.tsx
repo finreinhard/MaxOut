@@ -1,5 +1,4 @@
 import React from 'react';
-import {Image, StyleSheet} from "react-native";
 import Button from "../components/Button";
 import CheckIcon from "../components/icons/CheckIcon";
 import useSetup from "../store/setup/hook";
@@ -8,6 +7,7 @@ import Title from "../components/Title";
 import Container from "../components/Container";
 import LegalModalButtons from "../components/LegalModalButtons";
 import Text from "../components/Text";
+import Illustration from "../components/Illustration";
 
 const LegalSetupPage = () => {
     const {acceptLegalStuff} = useSetup();
@@ -17,10 +17,7 @@ const LegalSetupPage = () => {
 
     return (
         <Container>
-            <Image
-                style={styles.illustration}
-                source={require('../../assets/illustrations/legal.png')}
-            />
+            <Illustration source={require('../../assets/illustrations/legal.png')} />
             <Title text="MaxOut" />
             <Text withMargin>
                 Nice to have you on board! First of all we have to manage some legal stuff. Take your time to read
@@ -37,12 +34,5 @@ const LegalSetupPage = () => {
         </Container>
     );
 }
-
-const styles = StyleSheet.create({
-    illustration: {
-        width: '100%',
-        height: 300,
-    },
-});
 
 export default LegalSetupPage;

@@ -1,35 +1,68 @@
 import React from 'react';
-import {Text, View, StyleSheet, TouchableHighlight} from "react-native";
+import {View, StyleSheet, TouchableHighlight} from "react-native";
 import moment from "moment";
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation, useTheme} from '@react-navigation/native'
 import {SkillSummaryModel} from "../model/SkillSummaryModel";
+import {changeLuminance} from "../utils/color";
+import Text from "./Text";
+import {getLastDays} from "../utils/date";
 
 interface OwnProps {
     item: SkillSummaryModel;
+    daysShown: number;
 }
 
 const SkillSummary = (props: OwnProps) => {
-    const {id, title, highscore, lastScore, lastRepetition} = props.item;
+    const {daysShown, item} = props;
+    const {id, title, highscore, lastSets} = item;
     const navigation = useNavigation();
+    const {colors} = useTheme();
 
-    const since = lastRepetition ? moment(lastRepetition).fromNow(false) : 'Never';
+    const since = lastSets.length ? moment(lastSets[0].timestamp).fromNow(false) : 'No Data';
 
     return (
         <TouchableHighlight
-            style={styles.container}
-            activeOpacity={.6}
-            underlayColor="#ddd"
+            style={[styles.container, {backgroundColor: colors.card}]}
+            activeOpacity={.8}
+            underlayColor={changeLuminance(colors.card, .2)}
             onPress={() => navigation.navigate('SkillDetail', {id})}
         >
             <React.Fragment>
-                <View>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.since}>{since}</Text>
+                <View style={styles.header}>
+                    <View>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text>{since}</Text>
+                    </View>
                 </View>
-                <View style={styles.statistic}>
-                    <Text style={styles.lastScore}>{lastScore}</Text>
-                    <Text style={styles.highscore}>{` / ${highscore}`}</Text>
-                </View>
+                {lastSets.length !== 0 && (
+                    <View style={styles.history}>
+                        <View style={styles.dayBlock}>
+                            <Text style={{color: colors.primary}}>Highscore</Text>
+                            <Text style={[styles.dayScore, {color: colors.primary}]}>{highscore}</Text>
+                        </View>
+                        <View style={[styles.separator, {backgroundColor: colors.text}]} />
+                        {getLastDays(daysShown).map((day, index) => {
+                            const dayScore = lastSets
+                                .filter(set => moment(set.timestamp)
+                                    .isSame(moment().subtract(index, 'days'), 'day'))
+                                .sort((setA, setB) => setB.score - setA.score)
+                                .map(set => set.score)
+                                .find(() => true);
+
+                            return (
+                                <View
+                                    key={day}
+                                    style={styles.dayBlock}
+                                >
+                                    <Text>{day}</Text>
+                                    <Text style={[styles.dayScore, dayScore === highscore && {color: colors.primary}]}>
+                                        {dayScore || '-'}
+                                    </Text>
+                                </View>
+                            );
+                        })}
+                    </View>
+                )}
             </React.Fragment>
         </TouchableHighlight>
     );
@@ -37,28 +70,35 @@ const SkillSummary = (props: OwnProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 15,
-        paddingVertical: 10,
+        margin: 16,
+        borderRadius: 12,
+    },
+    header: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        margin: 16,
     },
     title: {
-        fontSize: 26,
+        fontWeight: 'bold',
     },
-    since: {
-        color: '#999',
+    history: {
+        flex: 1,
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between',
+        marginHorizontal: 16,
+        marginBottom: 16,
     },
-    statistic: {
-        flexDirection: 'row',
-        alignSelf: 'center',
+    dayBlock: {
+        alignItems: 'center',
     },
-    lastScore: {
-        fontSize: 18,
+    separator: {
+        width: 1,
+        height: '100%',
     },
-    highscore: {
-        fontSize: 18,
-        color: 'rgb(255, 149, 0)',
+    dayScore: {
+        marginTop: 2,
+        fontWeight: 'bold',
     },
 });
 

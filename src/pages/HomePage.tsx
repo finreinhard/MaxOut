@@ -1,86 +1,115 @@
 import React from 'react';
-import {Alert, Button, FlatList, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {Alert, FlatList, StyleSheet, View} from "react-native";
 import SkillSummary from "../components/SkillSummary";
 import {SkillSummaryModel} from "../model/SkillSummaryModel";
-import ListSeparator from "../components/ListSeparator";
 import useSkills from "../store/skills/hook";
+import {containerStyles} from "../components/Container";
+import Title from "../components/Title";
+import Illustration from "../components/Illustration";
+import Text from "../components/Text";
+import Button from "../components/Button";
+import {useTheme} from "@react-navigation/native";
+import PlusIcon from "../components/icons/PlusIcon";
+import moment from "moment";
+import {extractFirstOr, sortBy} from "../utils/array";
+
+// Maximum of 7
+const daysShown = 5;
 
 const HomePage = () => {
     const {skills, createSkill} = useSkills();
+    const {colors} = useTheme();
 
-    const data = Object
-        .keys(skills)
-        .map((id: string): SkillSummaryModel => {
-            const highscoreList = skills[id].sets
-                .sort((setA, setB) => setB.score - setA.score);
-            const lastSets = skills[id].sets
-                .map(set => ({lastRepetition: set.timestamp, lastScore: set.score}))
-                .sort((setA, setB) => setB.lastRepetition - setA.lastRepetition);
-
-            return {
+    const data = sortBy(
+        Object.entries(skills)
+            .map(([id, value]): SkillSummaryModel => ({
                 id,
-                title: skills[id].title,
-                highscore: highscoreList.length > 0 ? highscoreList[0].score : 0,
-                ...lastSets.length > 0 ? lastSets[0] : {lastScore: 0},
-            };
-        })
-        .sort((skillA, skillB) => (skillB.lastRepetition || Date.now()) - (skillA.lastRepetition || Date.now()));
+                title: value.title,
+                highscore: extractFirstOr(
+                    sortBy(
+                        value.sets,
+                        (set) => set.score,
+                        true,
+                    ),
+                    (set) => set.score,
+                    0,
+                ),
+                lastSets: sortBy(
+                    value.sets.filter((set) => moment().diff(set.timestamp, 'days') < daysShown),
+                    (set) => set.timestamp,
+                    true,
+                ),
+            })),
+        (skill) => extractFirstOr(skill.lastSets, (set) => set.timestamp, 0),
+        true,
+    );
 
-    const handleSetCreation = (title: string | undefined) => {
-        if (title) {
-            createSkill(title);
-        }
-    };
+    const handleCreateSetPress = () => Alert.prompt(
+        'Create a set',
+        'Give your new set a title.',
+        [
+            {
+                text: 'Cancel',
+                style: 'cancel',
+            },
+            {
+                text: 'Create',
+                onPress: (title: string | undefined) => {
+                    if (title) {
+                        createSkill(title);
+                    }
+                },
+            },
+        ],
+    );
 
     return (
-        <View style={styles.container}>
-            <SafeAreaView>
+        <FlatList
+            data={data}
+            renderItem={({item}) => <SkillSummary item={item} daysShown={daysShown} />}
+            keyExtractor={(item: SkillSummaryModel) => item.id}
+            ListHeaderComponent={() => (
                 <View style={styles.header}>
-                    <Text style={styles.title}>Max Out</Text>
+                    <Title text="Max Out" noMargin />
+                    {data.length > 0 && (
+                        <View>
+                            <Button
+                                small
+                                iconSize={16}
+                                icon={PlusIcon}
+                                color={colors.primary}
+                                text="Create"
+                                onPress={handleCreateSetPress}
+                            />
+                        </View>
+                    )}
+                </View>
+            )}
+            ListHeaderComponentStyle={containerStyles.container}
+            ListEmptyComponent={() => (
+                <View style={containerStyles.container}>
+                    <Illustration source={require('../../assets/illustrations/empty_list.png')} />
+                    <Text withMargin>
+                        Together we will grow your strength in skills choosen by you. To get started just create your
+                        first skill you want to max out.
+                    </Text>
                     <Button
-                        title="Create"
-                        onPress={() => Alert.prompt(
-                            'Create a set',
-                            'Give your new set a title.',
-                            [
-                                {
-                                    text: 'Cancel',
-                                    style: 'cancel',
-                                },
-                                {
-                                    text: 'Create',
-                                    onPress: handleSetCreation,
-                                },
-                            ],
-                        )}
+                        icon={PlusIcon}
+                        color={colors.primary}
+                        text="Create Skill"
+                        onPress={handleCreateSetPress}
                     />
                 </View>
-            </SafeAreaView>
-            <FlatList
-                data={data}
-                renderItem={({item}) => <SkillSummary item={item} />}
-                keyExtractor={(item: SkillSummaryModel) => item.id}
-                ItemSeparatorComponent={ListSeparator}
-            />
-        </View>
+            )}
+        />
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
     header: {
-        margin: 16,
         flexDirection: 'row',
         alignItems: 'flex-end',
         justifyContent: 'space-between',
-    },
-    title: {
-        color: '#000',
-        fontSize: 42,
-        fontWeight: 'bold',
     },
 });
 

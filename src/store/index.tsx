@@ -8,7 +8,7 @@ import {AppState} from "react-native";
 const GlobalStore = createContext<GlobalStoreContextProps>({} as GlobalStoreContextProps)
 
 type OwnProps = {
-    children: React.ReactNode
+    children: React.ReactNode;
 };
 
 export const GlobalStoreProvider = ({children}: OwnProps) => {

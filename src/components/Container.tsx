@@ -3,13 +3,13 @@ import {SafeAreaView, ScrollView, StyleSheet} from "react-native";
 
 const Container = (props: PropsWithChildren<{}>) => (
     <ScrollView>
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={containerStyles.container}>
             {props.children}
         </SafeAreaView>
     </ScrollView>
 );
 
-const styles = StyleSheet.create({
+export const containerStyles = StyleSheet.create({
     container: {
         flex: 1,
         margin: 16,

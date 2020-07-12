@@ -5,14 +5,21 @@ import {StyleSheet, Text} from "react-native";
 export interface TitleProps {
     text: string;
     color?: string;
+    noMargin?: boolean;
 }
 
 const Title = (props: TitleProps) => {
-    const {text, color} = props;
+    const {text, color, noMargin} = props;
     const {colors} = useTheme();
 
     return (
-        <Text style={[styles.title, {color: color || colors.text}]}>
+        <Text
+            style={[
+                styles.title,
+                {color: color || colors.text},
+                noMargin && styles.noMargin,
+            ]}
+        >
             {text}
         </Text>
     );
@@ -23,6 +30,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 38,
         marginVertical: 16,
+    },
+    noMargin: {
+        marginVertical: 0,
     },
 });
 
