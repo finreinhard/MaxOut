@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MaxOut Skills",
-    "slug": "maxout",
+    "slug": "maxout-skills",
     "backgroundColor": "#1E1E1E",
     "platforms": [
       "ios",
