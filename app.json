@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "MaxOut",
+    "name": "MaxOut Skills",
     "slug": "maxout",
     "backgroundColor": "#1E1E1E",
     "platforms": [
@@ -24,7 +24,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "li.angu.maxout",
+      "bundleIdentifier": "li.angu.maxout-skills",
       "icon": "./assets/apple_icon.png"
     }
   }

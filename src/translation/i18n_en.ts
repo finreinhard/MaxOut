@@ -1,6 +1,6 @@
 export default {
     general: {
-        title: 'MaxOut',
+        title: 'MaxOut Skills',
         close: 'Close',
         cancel: 'Cancel',
         create: 'Create',
@@ -31,7 +31,7 @@ export default {
         title: 'Settings',
         deleteDataWarning: 'Be careful! This step cannot be reverted.',
         readLegal: 'Read our Privacy Policy and our Terms of Services again, if you want.',
-        versionText: 'MaxOut v{{version}}',
+        versionText: 'MaxOut Skills v{{version}}',
         developedBy: 'Developed in Kassel by NorthSport and Anguli Networks.'
     },
     setup: {
