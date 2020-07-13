@@ -16,6 +16,7 @@ import Button from "../components/Button";
 import Text from "../components/Text";
 import ScoreInput from "../components/ScoreInput";
 import ListSeparator from "../components/ListSeparator";
+import {t} from "../translation/i18n";
 
 interface OwnProps {
     navigation: StackNavigationProp<RootStackParamList, 'Details'>
@@ -46,15 +47,15 @@ const SkillDetailPage = (props: OwnProps) => {
     }, [sets, setHighscore]);
 
     const handleSkillDelete = () => Alert.alert(
-        'Deleting Skill',
-        `Are you sure, you want to delete the ${title} Skill. All your data will be lost!`,
+        t('skills:delete'),
+        t('skills:deleteDescription', {title}),
         [
             {
-                text: 'Cancel',
+                text: t('cancel'),
                 style: 'cancel',
             },
             {
-                text: 'Delete',
+                text: t('delete'),
                 style: 'destructive',
                 onPress: () => {
                     navigation.navigate('Home');
@@ -73,7 +74,8 @@ const SkillDetailPage = (props: OwnProps) => {
                     {sets.length > 0 && (
                         <View style={[styles.highscoreContainer, {borderColor: colors.primary}]}>
                             <Text style={[styles.highscoreNumber, {color: colors.primary}]}>{highscore}</Text>
-                            <Text style={[styles.highscoreTitle, {color: colors.primary}]}>Your Best</Text>
+                            <Text
+                                style={[styles.highscoreTitle, {color: colors.primary}]}>{t('skills:highScore')}</Text>
                         </View>
                     )}
                     <ScoreInput skillId={id} />
@@ -87,7 +89,7 @@ const SkillDetailPage = (props: OwnProps) => {
                                 },
                             ]}
                         >
-                            <Text>Last Activities</Text>
+                            <Text>{t('skills:lastActivities')}</Text>
                         </View>
                     )}
                 </>
@@ -112,14 +114,20 @@ const SkillDetailPage = (props: OwnProps) => {
                             ]}
                         >
                             <Text>
-                                {`${sets.length} sets with ${sets.reduce((previousValue, currentValue) => previousValue + currentValue.score, 0)} repititions in total.`}
+                                {t(
+                                    'skills:setSummary',
+                                    {
+                                        length: sets.length,
+                                        repetitions: sets.reduce((previousValue, currentValue) => previousValue + currentValue.score, 0),
+                                    },
+                                )}
                             </Text>
                         </View>
                     )}
                     <View style={containerStyles.marginForTabBar}>
                         <Button
                             color={dangerColor}
-                            text="Delete Skill"
+                            text={t('skills:delete')}
                             onPress={handleSkillDelete}
                         />
                     </View>

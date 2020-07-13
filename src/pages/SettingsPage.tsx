@@ -9,20 +9,21 @@ import LegalModalButtons from "../components/LegalModalButtons";
 import packageJson from '../../package.json';
 import useCommon from "../store/common/hook";
 import {Alert} from "react-native";
+import {t} from "../translation/i18n";
 
 const SettingsPage = () => {
     const {resetData} = useCommon();
 
     const handleDeleteAllData = () => Alert.alert(
-        'Delete all data',
-        'Are you sure that you want to erase all data? This step cannot be undone!',
+        t('settings:deleteData'),
+        t('settings:deleteDataDescription'),
             [
                 {
-                    text: 'Cancel',
+                    text: t('cancel'),
                     style: 'cancel',
                 },
                 {
-                    text: 'Delete',
+                    text: t('delete'),
                     onPress: resetData,
                     style: 'destructive',
                 },
@@ -31,21 +32,18 @@ const SettingsPage = () => {
 
     return (
         <Container>
-            <Title text="Settings" />
-            <Text withMargin>Be careful! This step cannot be reverted.</Text>
+            <Title text={t('settings:title')} />
+            <Text withMargin>{t('settings:deleteDataWarning')}</Text>
             <Button
                 icon={DeleteIcon}
-                text="Delete all data"
+                text={t('settings:deleteData')}
                 onPress={handleDeleteAllData}
                 color={dangerColor}
             />
-            <Text withMargin>
-                You want to read our Privacy Policy and the Terms of Service again? No Problem! Just click on the
-                sheet you want to read.
-            </Text>
+            <Text withMargin>{t('settings:readLegal')}</Text>
             <LegalModalButtons />
-            <Text withMargin>{`MaxOut v${packageJson.version}`}</Text>
-            <Text withMargin>Developed in Kassel by NorthSportDE and Anguli Networks.</Text>
+            <Text withMargin>{t('settings:versionText', {version: packageJson.version})}</Text>
+            <Text withMargin>{t('settings:developedBy')}</Text>
         </Container>
     );
 };

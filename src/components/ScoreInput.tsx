@@ -14,6 +14,7 @@ import Button from "./Button";
 import PlusIcon from "./icons/PlusIcon";
 import {useTheme} from "@react-navigation/native";
 import useSkills from "../store/skills/hook";
+import {t} from "../translation/i18n";
 
 interface ScoreInputProps {
     skillId: string;
@@ -27,7 +28,7 @@ const ScoreInput = (props: ScoreInputProps) => {
 
     const handleSetCreation = async () => {
         if (isNaN(Number(score)) || Number(score) <= 0) {
-            Alert.alert(`"${score}" is not a positive number.`);
+            Alert.alert(t('skills:wrongInput', {score}))
             return;
         }
 
@@ -40,13 +41,13 @@ const ScoreInput = (props: ScoreInputProps) => {
             <View style={[styles.addContainer, {borderBottomColor: colors.border}]}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                        <Text>Add a set</Text>
+                        <Text>{t('skills:addSet')}</Text>
                         <TextInput
                             style={styles.scoreInput}
                             onChangeText={setScore}
                             value={score}
                             keyboardType="number-pad"
-                            placeholder="Score"
+                            placeholder={t('skills:score')}
                             placeholderTextColor="#bbb"
                         />
                     </KeyboardAvoidingView>
@@ -56,7 +57,7 @@ const ScoreInput = (props: ScoreInputProps) => {
                 icon={PlusIcon}
                 iconSize={16}
                 color={colors.primary}
-                text="Create"
+                text={t('create')}
                 onPress={handleSetCreation}
             />
         </View>

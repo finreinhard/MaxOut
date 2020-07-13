@@ -8,6 +8,7 @@ import Container from "../components/Container";
 import LegalModalButtons from "../components/LegalModalButtons";
 import Text from "../components/Text";
 import Illustration from "../components/Illustration";
+import {t} from "../translation/i18n";
 
 const LegalSetupPage = () => {
     const {acceptLegalStuff} = useSetup();
@@ -17,16 +18,13 @@ const LegalSetupPage = () => {
 
     return (
         <Container>
-            <Illustration source={require('../../assets/illustrations/legal.png')} />
-            <Title text="MaxOut" />
-            <Text withMargin>
-                Nice to have you on board! First of all we have to manage some legal stuff. Take your time to read
-                our Privacy Policy and the Terms of Service carefully.
-            </Text>
+            <Illustration source={require('../../assets/illustrations/legal.minified.png')} />
+            <Title text={t('title')} />
+            <Text withMargin>{t('setup:welcomeMessage')}</Text>
             <LegalModalButtons />
             <Button
                 onPress={handleAcceptButtonPress}
-                text="Accept All"
+                text={t('setup:acceptAll')}
                 center
                 color={colors.primary}
                 icon={CheckIcon}

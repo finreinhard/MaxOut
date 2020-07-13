@@ -1,4 +1,5 @@
 import {CommonActionTypes, DispatchAction} from "../types";
+import {AsyncStorage} from "react-native";
 
 const dataReset = () => ({
     type: CommonActionTypes.RESET,
@@ -6,4 +7,7 @@ const dataReset = () => ({
 
 export const resetData = () => (
     dispatch: React.Dispatch<DispatchAction<{}>>,
-) => dispatch(dataReset());
+) => {
+    dispatch(dataReset());
+    AsyncStorage.clear();
+};

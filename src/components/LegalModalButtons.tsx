@@ -4,6 +4,7 @@ import Button from "./Button";
 import PrivacyIcon from "./icons/PrivacyIcon";
 import TextIcon from "./icons/TextIcon";
 import LegalModal from "./legal/LegalModal";
+import {t} from "../translation/i18n";
 
 const LegalModalButtons = () => {
     const [privacyPolicyVisible, setPrivacyPolicyVisible] = useState(false);
@@ -23,12 +24,12 @@ const LegalModalButtons = () => {
         <>
             <Button
                 onPress={showPrivacyPolicy}
-                text="Privacy Policy"
+                text={t('legal:privacyPolicy')}
                 icon={PrivacyIcon}
             />
             <Button
                 onPress={showTermsOfService}
-                text="Terms of Service"
+                text={t('legal:termsOfService')}
                 icon={TextIcon}
             />
             <LegalModal

@@ -1,0 +1,48 @@
+export default {
+    general: {
+        title: 'MaxOut',
+        close: 'Close',
+        cancel: 'Cancel',
+        create: 'Create',
+        delete: 'Delete',
+        skills: 'Skills',
+    },
+    legal: {
+        privacyPolicy: 'Privacy Policy',
+        termsOfService: 'Terms of Service',
+    },
+    skills: {
+        create: 'Create a skill',
+        createDescription: 'Give your new skill a title.',
+        introText: 'Together we will grow your strength in skills choosen by you. To get started create your first skill you want to max out.',
+        highScore: 'High Score',
+        noData: 'No data',
+        delete: 'Delete Skill',
+        deleteDescription: 'Are you sure, you want to delete the {{title}} Skill? The skill cannot be recovered.',
+        wrongInput: '"{{score}}" is not a positive number.',
+        addSet: 'Add a set',
+        score: 'Score',
+        lastActivities: 'Last activities',
+        setSummary: '{{length}} sets with {{repetitions}} repetitions in total.',
+    },
+    settings: {
+        deleteData: 'Delete all data',
+        deleteDataDescription: 'Are you sure that you want to erase all data? This step cannot be undone!',
+        title: 'Settings',
+        deleteDataWarning: 'Be careful! This step cannot be reverted.',
+        readLegal: 'Read our Privacy Policy and our Terms of Services again, if you want.',
+        versionText: 'MaxOut v{{version}}',
+        developedBy: 'Developed in Kassel by NorthSport and Anguli Networks.'
+    },
+    setup: {
+        welcomeMessage: 'Nice to have you on board! First of all we have to manage some legal stuff. Take your time to read our Privacy Policy and the Terms of Service carefully.',
+        acceptAll: 'Accept all',
+        keepTrack: 'Keep Track',
+        keepTrackDescription: 'Every repetition counts. So it is important to not loose the overview.',
+        getNotified: 'Get Notified',
+        getNotifiedDescription: 'Sometimes motivation is hard. We can help you to build up a streak.',
+        privacy: 'Privacy',
+        privacyDescription: 'All your data stay\'s on your device. Only you can see them.',
+        getStarted: 'Get Started',
+    },
+};

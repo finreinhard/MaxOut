@@ -9,6 +9,7 @@ import CheckIcon from "../components/icons/CheckIcon";
 import {useTheme} from "@react-navigation/native";
 import Container from "../components/Container";
 import Title from "../components/Title";
+import {t} from "../translation/i18n";
 
 const WelcomePage = () => {
     const {completeSetup} = useSetup();
@@ -18,25 +19,25 @@ const WelcomePage = () => {
 
     return (
         <Container>
-            <Title text="MaxOut" />
+            <Title text={t('title')} />
             <FeatureCell
-                title="Keep Track"
-                description="Every repitition counts. So it is important to not loose the overview."
+                title={t('setup:keepTrack')}
+                description={t('setup:keepTrackDescription')}
                 icon={GraphIcon}
             />
             <FeatureCell
-                title="Get Notified"
-                description="Sometimes motivation is hard. We can help you to build up a streak."
+                title={t('setup:getNotified')}
+                description={t('setup:getNotifiedDescription')}
                 icon={BellIcon}
             />
             <FeatureCell
-                title="Privacy"
-                description="Like the gorgeous OutRun App by the second best developer, we value privacy."
+                title={t('setup:privacy')}
+                description={t('setup:privacyDescription')}
                 icon={PrivacyIcon}
             />
             <Button
                 icon={CheckIcon}
-                text="Get Started"
+                text={t('setup:getStarted')}
                 onPress={handleGetStartedPress}
                 color={colors.primary}
             />

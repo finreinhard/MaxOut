@@ -6,6 +6,7 @@ import {SkillSummaryModel} from "../model/SkillSummaryModel";
 import {changeLuminance} from "../utils/color";
 import Text from "./Text";
 import {getLastDays} from "../utils/date";
+import {t} from "../translation/i18n";
 
 interface OwnProps {
     item: SkillSummaryModel;
@@ -18,7 +19,7 @@ const SkillSummary = (props: OwnProps) => {
     const navigation = useNavigation();
     const {colors} = useTheme();
 
-    const since = lastSets.length ? moment(lastSets[0].timestamp).fromNow(false) : 'No Data';
+    const since = lastSets.length ? moment(lastSets[0].timestamp).fromNow(false) : t('skills:noData');
 
     return (
         <TouchableHighlight
@@ -37,7 +38,7 @@ const SkillSummary = (props: OwnProps) => {
                 {lastSets.length !== 0 && (
                     <View style={styles.history}>
                         <View style={styles.dayBlock}>
-                            <Text style={{color: colors.primary}}>Highscore</Text>
+                            <Text style={{color: colors.primary}}>{t('skills:highScore')}</Text>
                             <Text style={[styles.dayScore, {color: colors.primary}]}>{highscore}</Text>
                         </View>
                         <View style={[styles.separator, {backgroundColor: colors.text}]} />

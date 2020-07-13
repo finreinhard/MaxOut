@@ -5,6 +5,7 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import TermsOfService from "./TermsOfService";
 import {useTheme} from "@react-navigation/native";
 import {dangerColor} from "../../utils/color";
+import {t} from "../../translation/i18n";
 
 interface LegalModalProps {
     visible: boolean;
@@ -49,7 +50,7 @@ const LegalModal = (props: LegalModalProps) => {
                             }}
                         />
                         <Button
-                            text="Close"
+                            text={t('close')}
                             onPress={closeModal}
                             color={colors.primary}
                         />

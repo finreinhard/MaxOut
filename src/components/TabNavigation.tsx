@@ -8,6 +8,7 @@ import LegalSetupPage from "../pages/LegalSetupPage";
 import WelcomePage from "../pages/WelcomePage";
 import NavigationTabBar from "./NavigationTabBar";
 import {defaultTheme} from "../utils/color";
+import {t} from "../translation/i18n";
 
 const Tab = createBottomTabNavigator();
 const Theme = {
@@ -31,10 +32,12 @@ const TabNavigation = () => {
             >
                 <Tab.Screen
                     name="Skills"
+                    options={{title: t('skills')}}
                     component={SkillsNavigation}
                 />
                 <Tab.Screen
                     name="Settings"
+                    options={{title: t('settings:title')}}
                     component={SettingsPage}
                 />
             </Tab.Navigator>

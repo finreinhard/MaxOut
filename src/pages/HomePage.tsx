@@ -12,6 +12,7 @@ import {useTheme} from "@react-navigation/native";
 import PlusIcon from "../components/icons/PlusIcon";
 import moment from "moment";
 import {extractFirstOr, sortBy} from "../utils/array";
+import {t} from "../translation/i18n";
 
 // Maximum of 7
 const daysShown = 5;
@@ -44,16 +45,16 @@ const HomePage = () => {
         true,
     );
 
-    const handleCreateSetPress = () => Alert.prompt(
-        'Create a set',
-        'Give your new set a title.',
+    const handleCreateSkillPress = () => Alert.prompt(
+        t('skills:create'),
+        t('skills:createDescription'),
         [
             {
-                text: 'Cancel',
+                text: t('cancel'),
                 style: 'cancel',
             },
             {
-                text: 'Create',
+                text: t('create'),
                 onPress: (title: string | undefined) => {
                     if (title) {
                         createSkill(title);
@@ -70,7 +71,7 @@ const HomePage = () => {
             keyExtractor={(item: SkillSummaryModel) => item.id}
             ListHeaderComponent={() => (
                 <View style={styles.header}>
-                    <Title text="Max Out" noMargin />
+                    <Title text={t('title')} noMargin />
                     {data.length > 0 && (
                         <View>
                             <Button
@@ -78,8 +79,8 @@ const HomePage = () => {
                                 iconSize={16}
                                 icon={PlusIcon}
                                 color={colors.primary}
-                                text="Create"
-                                onPress={handleCreateSetPress}
+                                text={t('create')}
+                                onPress={handleCreateSkillPress}
                             />
                         </View>
                     )}
@@ -88,16 +89,13 @@ const HomePage = () => {
             ListHeaderComponentStyle={containerStyles.container}
             ListEmptyComponent={() => (
                 <View style={containerStyles.container}>
-                    <Illustration source={require('../../assets/illustrations/empty_list.png')} />
-                    <Text withMargin>
-                        Together we will grow your strength in skills choosen by you. To get started just create your
-                        first skill you want to max out.
-                    </Text>
+                    <Illustration source={require('../../assets/illustrations/empty_list.minified.png')} />
+                    <Text withMargin>{t('skills:introText')}</Text>
                     <Button
                         icon={PlusIcon}
                         color={colors.primary}
-                        text="Create Skill"
-                        onPress={handleCreateSetPress}
+                        text={t('skills:create')}
+                        onPress={handleCreateSkillPress}
                     />
                 </View>
             )}
