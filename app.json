@@ -23,7 +23,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "li.angu.maxout-skills",
       "icon": "./assets/apple_icon.png"
     }
