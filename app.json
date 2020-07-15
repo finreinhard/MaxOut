@@ -25,7 +25,8 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "li.angu.maxout-skills",
-      "icon": "./assets/apple_icon.png"
+      "icon": "./assets/apple_icon.png",
+      "buildNumber": "2"
     }
   }
 }
