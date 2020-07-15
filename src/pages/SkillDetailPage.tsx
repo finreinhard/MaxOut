@@ -33,6 +33,10 @@ const SkillDetailPage = (props: OwnProps) => {
     const {colors} = useTheme();
 
     useEffect(() => {
+        navigation.setOptions({title});
+    }, [title]);
+
+    useEffect(() => {
         return () => {
             if (isDeleted) {
                 deleteSkill(id);
